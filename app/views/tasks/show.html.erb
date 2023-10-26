@@ -1,2 +1,12 @@
 <h1>Tasks#show</h1>
 <p>Find me in app/views/tasks/show.html.erb</p>
+
+<p>
+  <h4>タスク</h4>
+  <%= @task.title%>
+</p>
+<p>
+  <h4>内容</h4>
+  <%= @task.content %>
+</p>
+<%= link_to '編集', edit_task_path(@task) %>
