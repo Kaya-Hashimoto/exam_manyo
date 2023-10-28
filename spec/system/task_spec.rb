@@ -26,7 +26,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         FactoryBot.create(:task)
         visit tasks_path
         click_on '詳細'
-        expect(page).to have_content(:task)
+        expect(page).to have_content 'タスク詳細'
       end
     end
   end
