@@ -2,7 +2,13 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit destroy update ]
 
   def index
-    @tasks = Task.all
+    if params[:latest]
+      @tasks = Task.latest
+    elsif params[:old]
+      @tasks = Task.old
+    else
+      @tasks = Task.all
+    end
   end
 
   def show

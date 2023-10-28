@@ -1,4 +1,6 @@
 <h1>タスク一覧</h1>
+<%= link_to '新着順', tasks_path(latest: "true") %>｜
+<%= link_to '古い順', tasks_path(old: "true") %>
 <% number = 0 %>
 <% @tasks.each do |task| %>
   <p>
