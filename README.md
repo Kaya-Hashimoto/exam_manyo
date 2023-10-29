@@ -20,3 +20,17 @@
 モデル **Labeling**
 * int:task_id FK
 * int:labels_id FK
+
+---
+herokuへのデプロイ手順
+
+```
+heroku login
+heroku create
+git init
+git add .
+git commit -m "herokuデプロイ準備"
+git push heroku step2:master
+heroku addons:create heroku-postgresql
+heroku run rails db:migrate
+```
