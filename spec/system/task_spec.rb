@@ -12,7 +12,7 @@ RSpec.describe 'タスク管理機能', type: :system do
       end
     end
   end
-  let!(:task) { FactoryBot.create(:task) }
+  let!(:task) { FactoryBot.create(:task, title: 'task') }
   let!(:second_task) { FactoryBot.create(:second_task) }
   describe '一覧表示機能' do
     before do
@@ -20,11 +20,12 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context '一覧画面に遷移した場合' do
       it '作成済みのタスク一覧が表示される' do
-        expect(page).to have_content 'タイトル1'
+        expect(page).to have_content 'task'
       end
     end
     context 'タスクが作成日時の古い順に並んでいる場合' do
-      it '終了期限でソートすると' do
+      it '終了期限でソートすると期限の降順に表示される' do
+        click_on '終了期限でソートする'
         task_list = all('p').first
         expect(task_list).to have_content 'タイトル2'
       end
