@@ -1,13 +1,13 @@
 FactoryBot.define do
   factory :task do
     title { 'Factoryで作ったタイトル1' }
-    content { 'Factoryで作ったコンテント1' }
-    expired_at { '0020231111T1000'}
+    content { 'Factoryで作ったコンテンツ1' }
+    expired_at { '002023-11-11T10:00' }
   end
 
   factory :second_task, class: Task do
-    title {'factoryで作ったタイトル2'}
-    content { 'Factoryで作ったコンテント2'}
-    expired_at { '0020231031T1000'}
+    title { 'factoryで作ったタイトル2'}
+    content { 'Factoryで作ったコンテンツ2' }
+    expired_at { '002023-11-30T10:00' }
   end
 end

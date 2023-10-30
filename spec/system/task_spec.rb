@@ -6,7 +6,7 @@ RSpec.describe 'タスク管理機能', type: :system do
         visit new_task_path
         fill_in 'タイトル', with: 'サンプル１'
         fill_in '内容', with: 'サンプル1'
-        fill_in '終了期限', with: '002023-11-22T1400'
+        fill_in '終了期限', with: '002023-11-22T14:00'
         click_on '送信'
         expect(page).to have_content 'タスクを作成しました'
       end
@@ -24,10 +24,17 @@ RSpec.describe 'タスク管理機能', type: :system do
       end
     end
     context 'タスクが作成日時の古い順に並んでいる場合' do
+      it '該当タスクの内容が一番上に表示される' do
+        task_list = all('p').first
+        expect(task_list).to have_content 'コンテンツ1'
+      end
+    end
+    context 'タスクが作成日時の古い順に並んでいる場合' do
       it '終了期限でソートすると期限の降順に表示される' do
         click_on '終了期限でソートする'
+        sleep(0.5)
         task_list = all('p').first
-        expect(task_list).to have_content 'タイトル2'
+        expect(task_list).to have_content '期限：2023/11/30'
       end
     end
   end
