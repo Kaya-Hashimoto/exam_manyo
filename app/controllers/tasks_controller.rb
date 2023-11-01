@@ -2,10 +2,20 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit destroy update ]
 
   def index
-    if params[:sort_expired]
-      @tasks = Task.all.order(expired_at: "DESC")
+    if params[:search].present? || params[:status].present?
+      if params[:search].present? && params[:status].present?
+        @tasks = Task.where('title like ?', "%#{params[:search]}%").where(status: params[:status])
+      elsif params[:search].present?
+        @tasks = Task.where('title like ?', "%#{params[:search]}%")
+      elsif params[:status].present?
+        @tasks = Task.where(status: params[:status])
+      end
     else
       @tasks = Task.all
+    end
+
+    if params[:sort_expired]
+      @tasks = Task.all.order(expired_at: "DESC")
     end
   end
 
@@ -48,6 +58,7 @@ class TasksController < ApplicationController
   end
 
   def task_params
-    params.require(:task).permit(:title, :content, :expired_at)
+    params.require(:task).permit(:title, :content, :expired_at, :status)
   end
+
 end

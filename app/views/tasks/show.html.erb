@@ -2,7 +2,7 @@
 
 <p>
   <h4>タスク</h4>
-  <%= @task.title%>
+  <%= @task.title %>
 </p>
 <p>
   <h4>内容</h4>
@@ -11,6 +11,10 @@
 <p>
   <h4>期限</h4>
   <%= l @task.expired_at, format: :long %>
+</p>
+<p>
+  <h4>ステータス</h4>
+  <%= @task.status %>
 </p>
 <%= link_to '編集', edit_task_path(@task) %>
 <%= link_to '削除', task_path(@task), method: :delete, data: { confirm: "削除していいですか？"} %>

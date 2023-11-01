@@ -22,5 +22,9 @@
     <%= form.label :expired_at %>：
     <%= form.datetime_field :expired_at %>
   </div>
+  <div>
+    <%= form.label :status %>：
+    <%= form.select :status, Task.statuses.keys, prompt: "ステータスを選択してください" %>
+  </div>
   <%= form.submit '送信' %>
 <% end %>

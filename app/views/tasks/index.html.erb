@@ -1,18 +1,26 @@
 <h1>タスク一覧</h1>
+<%= render 'search' %>
 <%= link_to '終了期限でソートする', tasks_path(sort_expired: "true") %>
-<% number = 0 %>
-<% @tasks.each do |task| %>
-  <h4>タスク<%= number += 1 %></h4>
-  <p>
-    タイトル：<%= task.title %>
-    <br>
-    内容：<%= task.content %>
-    <br>
-    期限：<%= l task.expired_at, format: :long %>
-  </p>
-  <p>
-    <%= link_to '詳細', task_path(task) %>
-    <%= link_to '編集', edit_task_path(task) %>
-    <%= link_to '削除', task_path(task), method: :delete, data: { confirm: "削除していいですか？"} %>
-  </p>
+<% if @tasks.any? %>
+  <% number = 0 %>
+  <% @tasks.each do |task| %>
+    <h4>タスク<%= number += 1 %></h4>
+    ステータス：<%= Task.statuses[task.status] %>
+    <p>
+      タイトル：<%= task.title %>
+      <br>
+      内容：<%= task.content %>
+      <br>
+      期限：<%= l task.expired_at, format: :long %>
+      <br>
+      登録日：<%= l task.created_at, format: :long %>
+    </p>
+    <p>
+      <%= link_to '詳細', task_path(task) %>
+      <%= link_to '編集', edit_task_path(task) %>
+      <%= link_to '削除', task_path(task), method: :delete, data: { confirm: "削除していいですか？"} %>
+    </p>
+  <% end %>
+<% else %>
+    <p>検索結果がありませんでした</p>
 <% end %>
