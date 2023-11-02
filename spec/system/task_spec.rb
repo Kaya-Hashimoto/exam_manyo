@@ -26,7 +26,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context 'タスクが作成日時の古い順に並んでいる場合' do
       it '該当タスクの内容が一番上に表示される' do
-        task_list = all('p').first
+        task_list = all('tbody td')[3]
         expect(task_list).to have_content 'コンテンツ1'
       end
     end
@@ -34,8 +34,8 @@ RSpec.describe 'タスク管理機能', type: :system do
       it '終了期限でソートすると期限の降順に表示される' do
         click_on '終了期限でソートする'
         sleep(0.5)
-        task_list = all('p').first
-        expect(task_list).to have_content '期限：2023/11/30'
+        task_list = all('tbody td')[4]
+        expect(task_list).to have_content '2023/11/30'
       end
     end
   end
@@ -47,7 +47,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context 'タイトルであいまい検索した場合' do
       it '検索キーワードを含むタスクで絞り込まれる' do
-        fill_in '検索したいタイトル', with: 'hell'
+        fill_in 'タイトル', with: 'hell'
         click_on '検索'
         expect(page).to have_content 'hello'
       end
@@ -61,7 +61,7 @@ RSpec.describe 'タスク管理機能', type: :system do
     end
     context 'タイトルのあいまい検索とステータス検索をした場合' do
       it '検索キーワードを含むステータスに完全一致するタスクに絞り込まれる' do
-        fill_in '検索したいタイトル', with: 'he'
+        fill_in 'タイトル', with: 'he'
         select '着手中', from: 'status'
         click_on '検索'
         expect(page).to have_content 'he' and have_content '着手中'

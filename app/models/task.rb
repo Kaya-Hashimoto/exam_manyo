@@ -6,4 +6,5 @@ class Task < ApplicationRecord
   enum priority: { "低": 0, "中": 1, "高": 2 }
   scope :search_title, -> (search){ where('title like ?', "%#{search}%") if search.present? }
   scope :search_status, -> (status){ where(status: status) if status.present? }
+  paginates_per 5
 end
