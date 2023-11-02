@@ -7,14 +7,15 @@ RSpec.describe 'タスク管理機能', type: :system do
         fill_in 'タイトル', with: 'サンプル１'
         fill_in '内容', with: 'サンプル1'
         fill_in '終了期限', with: '002023-11-22T14:00'
+        select '完了', from: 'task_status'
         click_on '送信'
         expect(page).to have_content 'タスクを作成しました'
       end
     end
   end
-  let!(:task) { FactoryBot.create(:task, title: 'task') }
-  let!(:second_task) { FactoryBot.create(:second_task) }
   describe '一覧表示機能' do
+    let!(:task) { FactoryBot.create(:task, title: 'task') }
+    let!(:second_task) { FactoryBot.create(:second_task) }
     before do
       visit tasks_path
     end
@@ -35,6 +36,35 @@ RSpec.describe 'タスク管理機能', type: :system do
         sleep(0.5)
         task_list = all('p').first
         expect(task_list).to have_content '期限：2023/11/30'
+      end
+    end
+  end
+  describe '検索機能' do
+    before do
+      FactoryBot.create(:task, title: "hello")
+      FactoryBot.create(:second_task)
+      visit tasks_path
+    end
+    context 'タイトルであいまい検索した場合' do
+      it '検索キーワードを含むタスクで絞り込まれる' do
+        fill_in '検索したいタイトル', with: 'hell'
+        click_on '検索'
+        expect(page).to have_content 'hello'
+      end
+    end
+    context 'ステータス検索をした場合' do
+      it 'ステータスに完全一致したタスクが表示される' do
+        select '未着手', from: 'status'
+        click_on '検索'
+        expect(page).to have_content '未着手'
+      end
+    end
+    context 'タイトルのあいまい検索とステータス検索をした場合' do
+      it '検索キーワードを含むステータスに完全一致するタスクに絞り込まれる' do
+        fill_in '検索したいタイトル', with: 'he'
+        select '着手中', from: 'status'
+        click_on '検索'
+        expect(page).to have_content 'he' and have_content '着手中'
       end
     end
   end

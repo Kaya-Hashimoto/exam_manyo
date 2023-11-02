@@ -16,5 +16,9 @@
   <h4>ステータス</h4>
   <%= @task.status %>
 </p>
+<p>
+  <h4>優先順位</h4>
+  <%= @task.priority %>
+</p>
 <%= link_to '編集', edit_task_path(@task) %>
 <%= link_to '削除', task_path(@task), method: :delete, data: { confirm: "削除していいですか？"} %>
