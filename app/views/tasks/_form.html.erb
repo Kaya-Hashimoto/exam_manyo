@@ -18,5 +18,17 @@
     <%= form.label :content %>：
     <%= form.text_area :content %>
   </div>
+  <div>
+    <%= form.label :expired_at %>：
+    <%= form.datetime_field :expired_at %>
+  </div>
+  <div>
+    <%= form.label :status %>：
+    <%= form.select :status, Task.statuses.keys, prompt: "ステータスを選択してください" %>
+  </div>
+  <div>
+    <%= form.label :priority %>：
+    <%= form.select :priority, Task.priorities.keys %>
+  </div>
   <%= form.submit '送信' %>
 <% end %>
