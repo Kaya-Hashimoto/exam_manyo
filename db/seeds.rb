@@ -2,7 +2,10 @@
   name = Faker::GreekPhilosophers.name
   email = Faker::Internet.email
   password = Faker::Alphanumeric.alphanumeric(number: 10)
-  User.create!(name: name,
+  title = Faker::Fantasy::Tolkien.character
+  content = Faker::Quotes::Shakespeare.hamlet_quote
+  user = User.create!(name: name,
               email: email,
               password: password)
+  Task.create!(title: title, content: content, user: user)
 end
