@@ -9,3 +9,7 @@
               password: password)
   Task.create!(title: title, content: content, user: user)
 end
+User.create!(name: '管理者',
+            email: 'admin@mail.com',
+            password: 'lplplp', password_confirmation: 'lplplp',
+            admin: true)

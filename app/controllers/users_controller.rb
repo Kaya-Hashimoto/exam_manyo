@@ -17,7 +17,9 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find(params[:id])
-    if @user != current_user
+    if current_user.admin? || @user == current_user
+    else
+      flash[:notice] = '自分以外のマイページにはアクセスできません'
       redirect_to tasks_path
     end
   end

@@ -6,4 +6,8 @@ module SessionsHelper
   def logged_in?
     current_user.present?
   end
+
+  def admin?
+    current_user == User.find_by(id: session[:admin])
+  end
 end
