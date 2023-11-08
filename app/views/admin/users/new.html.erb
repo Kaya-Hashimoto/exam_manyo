@@ -23,5 +23,10 @@
   <%= form.label :password_confirmation %>
   <%= form.password_field :password_confirmation %>
 
+  <%= form.radio_button :admin, :true %>
+  <%= form.label :admin, "管理者権限を付与する" %>
+  <%= form.radio_button :admin, :false %>
+  <%= form.label :admin, "権限を削除する" %>
+
   <%= form.submit "作成" %>
 <% end %>
