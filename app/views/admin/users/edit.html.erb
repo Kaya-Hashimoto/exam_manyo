@@ -12,10 +12,13 @@
   <%= f.label :password_confirmation %>
   <%= f.password_field :password_confirmation %>
 <br>
+<% if @user.admin != true %>
   <%= f.radio_button :admin, :true %>
   <%= f.label :admin, "管理者権限を付与する" %>
+<% else %>
   <%= f.radio_button :admin, :false %>
   <%= f.label :admin, "権限を削除する" %>
+<% end %>
 <br>
   <%= f.submit "更新" %>
 <% end %>

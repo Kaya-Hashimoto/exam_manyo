@@ -13,7 +13,7 @@ class User < ApplicationRecord
   private
 
   def admin_cannot_update
-    if User.where(admin: true).count == 1 && self.admin == false
+    if User.where(admin: true).count == 1 && self.admin_change == [true, false]
       errors.add(:base, '管理者は必ず一人必要です')
       throw :abort
     end

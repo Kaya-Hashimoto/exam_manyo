@@ -39,7 +39,7 @@ class Admin::UsersController < ApplicationController
       flash[:notice] = 'ユーザー情報を更新しました'
       redirect_to admin_users_path
     else
-      flash[:error] = @user.errors.full_messages.join(', ')
+      flash.now[:error] = @user.errors.full_messages.join(', ')
       render :edit
     end
   end
