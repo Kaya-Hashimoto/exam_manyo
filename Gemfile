@@ -17,6 +17,7 @@ gem 'bcrypt'
 gem 'net-smtp'
 gem 'net-imap'
 gem 'net-pop'
+gem 'faker'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
@@ -33,7 +34,6 @@ group :development do
   gem 'spring'
   gem 'better_errors'
   gem 'binding_of_caller'
-  gem 'faker'
 end
 
 group :test do
