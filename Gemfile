@@ -13,12 +13,18 @@ gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.7'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'kaminari'
+gem 'bcrypt'
+gem 'net-smtp'
+gem 'net-imap'
+gem 'net-pop'
+gem 'faker'
 
 group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 6.0'
   gem 'factory_bot_rails'
   gem 'rexml'
+  gem 'pry-rails'
 end
 
 group :development do
@@ -26,7 +32,6 @@ group :development do
   gem 'rack-mini-profiler', '~> 2.0'
   gem 'listen', '~> 3.3'
   gem 'spring'
-  gem 'pry-rails'
   gem 'better_errors'
   gem 'binding_of_caller'
 end

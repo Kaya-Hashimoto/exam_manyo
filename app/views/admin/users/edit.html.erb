@@ -1,0 +1,24 @@
+<h1>ユーザー情報更新画面</h1>
+<%= form_with(model: @user, url: admin_user_path(@user), local: true) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+<br>
+  <%= f.label :email %>
+  <%= f.email_field :email %>
+<br>
+  <%= f.label :password %>
+  <%= f.password_field :password %>
+<br>
+  <%= f.label :password_confirmation %>
+  <%= f.password_field :password_confirmation %>
+<br>
+<% if @user.admin != true %>
+  <%= f.radio_button :admin, :true %>
+  <%= f.label :admin, "管理者権限を付与する" %>
+<% else %>
+  <%= f.radio_button :admin, :false %>
+  <%= f.label :admin, "権限を削除する" %>
+<% end %>
+<br>
+  <%= f.submit "更新" %>
+<% end %>

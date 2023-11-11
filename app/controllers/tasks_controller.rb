@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   before_action :set_task, only: %i[ show edit destroy update ]
 
   def index
-    @tasks = Task.page(params[:page]).per(5)
+    @tasks = current_user.tasks.page(params[:page]).per(5)
     if params[:sort_expired]
       @tasks = Task.all.order(expired_at: "DESC").page(params[:page])
     elsif params[:sort_priority]
@@ -20,7 +20,8 @@ class TasksController < ApplicationController
 
   def update
     if @task.update(task_params)
-      redirect_to task_path(@task), notice: "タスクを編集しました"
+      flash[:notice] = 'タスクを編集しました'
+      redirect_to task_path
     else
       render :edit
     end
@@ -31,9 +32,10 @@ class TasksController < ApplicationController
   end
 
   def create
-    @task = Task.new(task_params)
+    @task = current_user.tasks.build(task_params)
     if @task.save
-      redirect_to tasks_path, notice: "タスクを作成しました"
+      flash[:notice] = 'タスクを作成しました'
+      redirect_to tasks_path
     else
       render :new
     end
@@ -41,7 +43,8 @@ class TasksController < ApplicationController
 
   def destroy
     @task.destroy
-    redirect_to tasks_path, notice: "タスクを削除しました"
+    flash[:notice] = 'タスクを削除しました'
+    redirect_to tasks_path
   end
 
   private

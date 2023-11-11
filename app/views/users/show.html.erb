@@ -1,0 +1,20 @@
+<h1><%= @user.name %>のマイページ</h1>
+<br>
+<table>
+  <thead>
+    <tr>
+      <th>タイトル</th>
+      <th>内容</th>
+      <th>投稿者</th>
+    </tr>
+  </thead>
+  <% @user.tasks.each do |user| %>
+  <tbody>
+    <tr>
+      <th><%= user.title %></th>
+      <th><%= user.content %></th>
+      <th><%= @user.name %></th>
+    </tr>
+  </tbody>
+  <% end %>
+</table>
