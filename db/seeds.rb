@@ -1,3 +1,7 @@
+5.times do |i|
+  label = Label.create!(label_title: "sample#{i + 1}")
+end
+
 30.times do |n|
   name = Faker::GreekPhilosophers.name
   email = Faker::Internet.email

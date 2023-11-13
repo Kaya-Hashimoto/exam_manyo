@@ -11,5 +11,9 @@ FactoryBot.define do
       expired_at { '002023-11-30T10:00' }
       status { 0 }
     end
+
+    after(:create) do |task|
+      task.labels << create(:label, :label2)
+    end
   end
 end

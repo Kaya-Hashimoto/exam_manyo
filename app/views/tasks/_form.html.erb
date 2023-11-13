@@ -30,5 +30,8 @@
     <%= form.label :priority %>：
     <%= form.select :priority, Task.priorities.keys %>
   </div>
+  <div>
+    <%= form.collection_check_boxes(:label_ids, Label.all, :id, :label_title) %>
+  </div>
   <%= form.submit '送信' %>
 <% end %>
