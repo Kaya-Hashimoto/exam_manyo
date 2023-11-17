@@ -18,8 +18,17 @@ gem 'net-smtp'
 gem 'net-imap'
 gem 'net-pop'
 gem 'faker'
+gem 'dotenv-rails'
+gem 'unicorn'
 
 group :development, :test do
+  gem 'capistrano', '3.16.0'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano-rbenv'
+  gem 'capistrano3-unicorn'
+  gem 'ed25519'
+  gem 'bcrypt_pbkdf'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'rspec-rails', '~> 6.0'
   gem 'factory_bot_rails'
